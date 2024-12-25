@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx
+spec:
+  affinity:
+    nodeAffinity: #soft rule. It allows even if it is not a match
+      preferredDuringSchedulingIgnoredDuringExecution:
+      - weight: 1 # we can give as many as we wish from 1 to 100. it checks one by one 
+        preference:
+          matchExpressions:
+          - key: hardware
+            operator: In
+            values:
+            - elk
+  containers:
+  - name : nginx
+    image: nginx
+  tolerations:
+  - key: "hardware"
+    operator: "Equal"
+    value: "gpu"
+    effect: "NoSchedule" # NoSchedule will not allow new pods and NoExecute will affect to already running pods on the node

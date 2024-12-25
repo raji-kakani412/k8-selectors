@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx
+spec:
+  containers:
+  - name : nginx
+    image: nginx
+  nodeSelector:
+    hardware: gpu
+  tolerations:
+  - key: "hardware"
+    operator: "Equal"
+    value: "gpu"
+    effect: "NoSchedule" # NoSchedule will not allow new pods and NoExecute will affect to already running pods on the node
