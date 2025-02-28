@@ -45,5 +45,5 @@ spec:
             - affinity
           topologyKey: topology.kubernetes.io/zone
   containers:
-  - name: with-pod-affinity
-    image: registry.k8s.io/pause:3.8
+  - name: nginx
+    image: nginx:stable-perl
